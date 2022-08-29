@@ -28,7 +28,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: springboot
+      - name: HelloWorld
         image: omeshwar/harness-training:latest
         ports:
         - containerPort: 8080
