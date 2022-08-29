@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: demoapp
-        image: omeshwar/harness-training:latest
+        image: omeshwar/harness-training:test
         ports:
         - containerPort: 8080
