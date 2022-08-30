@@ -29,6 +29,6 @@ spec:
     spec:
       containers:
       - name: demoapp
-        image: {{.values.image_name}}
+        image: {{.values.image}}
         ports:
         - containerPort: 8080
