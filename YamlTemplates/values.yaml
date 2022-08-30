@@ -10,14 +10,14 @@ image: <+artifact.image>
 # Service Type allow you to specify what kind of service you want.
 # Possible values for ServiceType are:
 # ClusterIP | NodePort | LoadBalancer | ExternalName
-serviceType: ClusterIP
+# serviceType: ClusterIP
 
 # A Service can map an incoming port to any targetPort.
 # targetPort is where application is listening on inside the container.
 servicePort: 8080
 serviceTargetPort: 8080
 
-#Templatise this using harness variables.
+# Templatise this using harness variables.
 # sename: <+pipeline.variables.seusername>
 
 # Specify all environment variables to be added to the container.
@@ -25,10 +25,10 @@ serviceTargetPort: 8080
 # and a Secret, respectively.
 # Both are added to the container environment in podSpec as envFrom source.
 
-env:
-  config:
+# env:
+  # config:
   #  HARNESS_FF_KEY: key
   #  HARNESS_SE: seusername
-    HARNESS_BUILD: <+pipeline.sequenceId>
+  #  HARNESS_BUILD: <+pipeline.sequenceId>
   # secrets:
     # key2: value2
