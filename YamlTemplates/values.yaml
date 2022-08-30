@@ -1,92 +1,34 @@
-name:
+name: myapp
 replicas: 1
 
-image:  ${artifact.metadata.image}
-dockercfg: ${artifact.source.dockerconfig}
+image: <+artifact.image>
+# dockercfg: <+artifact.imagePullSecret>
 
-createImagePullSecret: false
+# createNamespace: true
+# namespace: <+infra.namespace>
 
-createNamespace: true
-namespace:
-deploymentName:
+# Service Type allow you to specify what kind of service you want.
+# Possible values for ServiceType are:
+# ClusterIP | NodePort | LoadBalancer | ExternalName
+serviceType: ClusterIP
 
-# Kubernetes Service Information
-service:
-  annotations:
-    key:
-  svcSelector:
-    key:
-  svcName:
-  svcType:
-  svcTrafficPol:
-  httpSvcPort:
-    name:
-    httpPort:
-      port:
-      protocol:
-      targetPort:
-  httpsSvcPort:
-    enabled: false
-    name:
-    httpsPort:
-      port:
-      protocol:
-      targetPort:
+# A Service can map an incoming port to any targetPort.
+# targetPort is where application is listening on inside the container.
+servicePort: 8080
+serviceTargetPort: 8080
 
-# HPA Data
-hpa:
-  enabled: false
-  minReplicas: 0
-  maxReplicas: 0
-  resourceName: ""
-  targetAverageUtilization: 0
+#Templatise this using harness variables.
+# sename: <+pipeline.variables.seusername>
 
-# EnvFrom Secrets
-secretRefEnabled: false
-secrets:
-  - secretRef:
-      name:
+# Specify all environment variables to be added to the container.
+# The following two maps, config and secrets, are put into a ConfigMap
+# and a Secret, respectively.
+# Both are added to the container environment in podSpec as envFrom source.
 
-# EnvFrom ConfigMap
-configMapRefEnabled: false
-configMap:
-  - configMapRef:
-      name:
-
-# Container Resources
-resourcesEnabled: false
-resources:
-  requests:
-    cpu:
-    memory:
-  limits:
-    cpu:
-    memory:
-
-# Container Specific Networking
-ports:
-  - containerPort: 8080
-    name: http
-    protocol: TCP
-
-# Container Probes
-probesEnabled: false
-probes:
-  readinessProbe:
-    httpGet:
-      path:
-      port:
-    initialDelaySeconds:
-    timeoutSeconds:
-    failureThreshold:
-    successThreshold:
-    periodSeconds:
-  livenessProbe:
-    httpGet:
-      path:
-      port:
-    initialDelaySeconds:
-    timeoutSeconds:
-    failureThreshold:
-    successThreshold:
-    periodSeconds:
+env:
+  config:
+  #  HARNESS_FF_KEY: key
+  #  HARNESS_SE: seusername
+    HARNESS_BUILD: <+pipeline.sequenceId>
+  # secrets:
+    # key2: value2
